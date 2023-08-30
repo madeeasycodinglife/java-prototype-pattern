@@ -1,0 +1,68 @@
+**Java Prototype Pattern: Cloning Objects**
+
+The Prototype Design Pattern is used to create new objects by copying an existing object, known as the prototype.
+It allows you to create new objects with the same properties as an existing object, avoiding the need to recreate the object from scratch.
+
+**Example:**
+
+Here's an example of a prototype pattern in Java using the `clone()` method:
+
+```java
+class Person implements Cloneable {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getter methods
+
+    @Override
+    public Person clone() {
+        try {
+            return (Person) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+}
+
+public class PrototypeExample {
+    public static void main(String[] args) {
+        Person original = new Person("Alice", 25);
+        Person copy = original.clone();
+
+        System.out.println("Original: " + original.getName() + ", " + original.getAge());
+        System.out.println("Copy: " + copy.getName() + ", " + copy.getAge());
+    }
+}
+```
+
+**How to Identify When to Apply the Prototype Design Pattern:**
+
+1. **Copying Objects:** When you need to create new objects that are similar to existing objects and want to avoid
+manual object initialization.
+
+2. **Complex Object Creation:** If creating an object involves complex initialization or a resource-intensive process,
+the prototype pattern simplifies the process by copying an existing object.
+
+3. **Immutable Objects:** When you want to create immutable objects, the prototype pattern allows you to create new
+instances while keeping the original object unchanged.
+
+**Where to Apply the Prototype Design Pattern:**
+
+- **Object Cloning:** The prototype pattern is specifically designed for creating objects by cloning existing objects.
+
+- **Resource-Intensive Objects:** Use it when creating objects with resource-intensive setup (e.g., database connections,
+ file loading) to avoid repeating those setup steps.
+
+- **Customized Instances:** When you need to create similar but customized instances based on a prototype object.
+
+- **Stateful Objects:** If you want to create new instances of stateful objects while preserving the state of the original.
+
+- **Immutable Objects:** To create immutable objects efficiently.
+
+By applying the Prototype Design Pattern, you can efficiently create new instances of objects, especially when copying an
+ existing object with a complex setup or when preserving the state of a stateful object.
